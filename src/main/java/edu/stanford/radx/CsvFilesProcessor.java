@@ -48,7 +48,7 @@ public class CsvFilesProcessor {
                 } catch (Exception e) {
                     logger.error("Exception thrown by CSV handler", e);
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 logger.error("Error parsing CSV file", e);
             }
         });

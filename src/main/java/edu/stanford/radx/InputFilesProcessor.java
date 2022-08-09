@@ -30,18 +30,22 @@ public class InputFilesProcessor {
     public void processInputFiles(List<Path> inputPaths, Consumer<CsvFileContents> csvHandler) throws IOException {
         logger.debug("Processing files");
         for (var inputPath : inputPaths) {
-            if(!Files.exists(inputPath)) {
-                logger.debug("Input path does not exist ({})", inputPath);
-                return;
-            }
-            if(Files.isDirectory(inputPath)) {
-                var walker = Files.walk(inputPath, MAX_DEPTH, FileVisitOption.FOLLOW_LINKS);
-                walker.forEach(p -> {
-                    processPotentialDataDictionaryFile(p, csvHandler);
-                });
-            }
-            else {
-                processPotentialDataDictionaryFile(inputPath, csvHandler);
+            try {
+                if(!Files.exists(inputPath)) {
+                    logger.debug("Input path does not exist ({})", inputPath);
+                    return;
+                }
+                if(Files.isDirectory(inputPath)) {
+                    var walker = Files.walk(inputPath, MAX_DEPTH, FileVisitOption.FOLLOW_LINKS);
+                    walker.forEach(p -> {
+                        processPotentialDataDictionaryFile(p, csvHandler);
+                    });
+                }
+                else {
+                    processPotentialDataDictionaryFile(inputPath, csvHandler);
+                }
+            } catch (IOException e) {
+                logger.debug("Could not process path: {}", inputPath, e);
             }
 
         }
