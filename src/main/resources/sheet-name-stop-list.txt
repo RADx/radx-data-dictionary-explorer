@@ -1,0 +1,12 @@
+# Stoplist.  Insensitive to case, white space, underscores and dashes, so "README", "readme", "Read Me",
+# "READ-ME", "Read_ME" would all be matched by "readme"
+#
+# Commented lines start with # character and are complete ignored.
+
+readme
+summary
+valuesets
+datatypes
+changelog
+history
+changes

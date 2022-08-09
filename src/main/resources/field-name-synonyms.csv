@@ -1,0 +1,53 @@
+Field Name,Canonical Field Name
+answer_text,value_constraints
+answer_type,datatype
+api documentation (if applicable),seeAlso
+branching logic (show field only if...),branching_logic
+cde,
+"choices, calculations, or slider labels",value_constraints
+"comments (optional, form collection name)",form_name
+Form Name,form_name
+custom alignment,
+alignment,
+data type,datatype
+dependent fields,
+description,description
+field annotation,description
+field label,label
+field name,variable_name
+field note,field_note
+field type,ui
+human-readable description,description
+human-readable description [formal definitions taken from official garmin api documentation),description
+identifier?,phi_id
+mandatory?,required
+matrix group name,
+matrix ranking?,
+permisible values,value_constraints
+permissable values,value_constraints
+permissible value,value_constraints
+permissible values,value_constraints
+"possible values (if applicable)",value_constraints
+"possible values (if applicable) if 'value data type' = 'binary' and there is only one possible value shown, the alternative is null",value_constraints
+prompt,label
+question number,question_id
+question number (surveys only),question_id
+question or description (if necessary),label
+question_name,variable_name
+question_text,label
+required field?,required
+section header,section_header
+slug,variable_name
+submission requirement,required
+survey_name,survey_name
+survey_version,survey_version
+technical description,description
+text validation max,max
+text validation min,min
+text validation type or show slider number,pattern
+unique,unique
+unit,units
+units,units
+value data types,datatype
+variable / field name,variable_name
+variable name,variable_name
