@@ -51,3 +51,6 @@ units,units
 value data types,datatype
 variable / field name,variable_name
 variable name,variable_name
+RADx Global Prompt,label
+RADx Global Variable,variable_name
+RADx Global Response Options,value_constraints
