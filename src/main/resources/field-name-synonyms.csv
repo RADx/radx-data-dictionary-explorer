@@ -51,6 +51,15 @@ units,units
 value data types,datatype
 variable / field name,variable_name
 variable name,variable_name
-RADx Global Prompt,label
-RADx Global Variable,variable_name
-RADx Global Response Options,value_constraints
+RADx-TECH Prompt,label
+RADx-TECH Variable,variable_name
+RADx-TECH Response Options,value_constraints
+RADx-rad Prompt,label
+RADx-rad Variable,variable_name
+RADx-rad Response Options,value_constraints
+RADx-UP Prompt,label
+RADx-UP Variable,variable_name
+RADx-UP Response Options,value_constraints
+DHT Prompt,label
+DHT Variable,variable_name
+DHT Response Options,value_constraints
