@@ -17,9 +17,11 @@ withdigests=$outdir/withdigests
 
 mkdir $outdir
 
+dd make-csv --in $curated --out $outdir/extracted
+
 dd make-csv --in $curated --out $processingdir
 
-dd strip --in $processingdir --out $processingdir                
+dd strip --in $processingdir --out $processingdir              
 
 dd collapse --in  $processingdir --out $processingdir --key-field-name question_name --key-field-regex "^([^\-]+)\-\d+" --key-field-regex-group 1
 
@@ -32,6 +34,8 @@ dd transform --in $processingdir --out $processingdir --lowercase --collapse-whi
 dd split --in $processingdir --out $splitdictionaries  --field-names survey_name  
 
 dd retain-max-rows --in $splitdictionaries --out $latestversions --field-names survey_version
+
+dd filter --in $latestversions --out $latestversions --field-value-filter variable_name=.+
 
 dd append-source --in $latestversions --out $withsources  
 
