@@ -17,50 +17,48 @@ withdigests=$outdir/withdigests
 
 mkdir $outdir
 
-dd make-csv --in $curated --out $outdir/extracted
+dd make-csv --in $curated --out $outdir/0-extracted
 
-dd make-csv --in $curated --out $processingdir
+dd strip --in $outdir/0-extracted --out $outdir/1-stripped              
 
-dd strip --in $processingdir --out $processingdir              
+dd collapse --in  $outdir/1-stripped --out $outdir/2-collapsed --key-field-name question_name --key-field-regex "^([^\-]+)\-\d+" --key-field-regex-group 1
 
-dd collapse --in  $processingdir --out $processingdir --key-field-name question_name --key-field-regex "^([^\-]+)\-\d+" --key-field-regex-group 1
+dd fill-down --in $outdir/2-collapsed --out $outdir/3-filled --field-names survey_name,survey_version,"Section Header"    
 
-dd fill-down --in  $processingdir --out $processingdir --field-names survey_name,survey_version,"Section Header"    
+dd replace-field-names --in $outdir/3-filled --out $outdir/4-mapped           
 
-dd replace-field-names --in $processingdir --out $processingdir           
+dd transform --in $outdir/4-mapped --out $outdir/5-normalized --lowercase --collapse-white-space --field-names required,variable_name,datatype,units 
 
-dd transform --in $processingdir --out $processingdir --lowercase --collapse-white-space --field-names required,variable_name,datatype,units 
+dd split --in $outdir/5-normalized --out $outdir/6-split  --field-names survey_name  
 
-dd split --in $processingdir --out $splitdictionaries  --field-names survey_name  
+dd retain-max-rows --in $outdir/6-split --out $outdir/7-deduped --field-names survey_version
 
-dd retain-max-rows --in $splitdictionaries --out $latestversions --field-names survey_version
+dd filter --in $outdir/7-deduped --out $outdir/8-non-blank-variable-names --field-value-filter variable_name=.+
 
-dd filter --in $latestversions --out $latestversions --field-value-filter variable_name=.+
+dd append-source --in $outdir/8-non-blank-variable-names --out $outdir/9-with-sources  
 
-dd append-source --in $latestversions --out $withsources  
+dd append-digest --in $outdir/9-with-sources   --out $outdir/10-with-digests --field-names variable_name,source_file,source_directory
 
-dd append-digest --in $withsources   --out $withdigests --field-names variable_name,source_file,source_directory
-
-dd merge --in $withdigests --out $outdir/merged.csv  --distinct --sorted
+dd merge --in $outdir/10-with-digests --out $outdir/merged.csv  --distinct --sorted
 
 
 
-dd retain-fields --in $latestversions --out $outdir/variable_names --field-names variable_name,label
-dd distinct --in $outidr/variable_names --out $outidr/variable_names
-dd append-source --in $outdir/variable_names --out $outdir/variable_names
-dd merge --in $outdir/variable_names --out $outdir/variable_names-summary.csv --sorted
-
-
-dd retain-fields --in $withsources --out $outdir/datatypes --field-names datatype,source_file,source_directory
-dd distinct --in $outdir/datatypes --out $outdir/datatypes
-dd merge --in $outdir/datatypes --out $outdir/datatypes-summary.csv  --distinct --sorted
-
-dd retain-fields --in $latestversions --out $outdir/units --field-names units,source_file,source_directory
-dd distinct --in $outdir/units --out $outdir/units
-dd merge --in $outdir/units --out $outdir/units-summary.csv  --distinct --sorted
-
-dd retain-fields --in $latestversions --out $outdir/labels --field-names label,source_file,source_directory
-dd merge --in $outdir/labels --out $outdir/labels-summary.csv  --distinct --sorted
-
-dd retain-fields --in $latestversions --out $outdir/value-constraints --field-names value_constraints,source_directory
-dd merge --in $outdir/value-constraints --out $outdir/value-constraints-summary.csv  --distinct --sorted
+# dd retain-fields --in $latestversions --out $outdir/variable_names --field-names variable_name,label
+# dd distinct --in $outidr/variable_names --out $outidr/variable_names
+# dd append-source --in $outdir/variable_names --out $outdir/variable_names
+# dd merge --in $outdir/variable_names --out $outdir/variable_names-summary.csv --sorted
+#
+#
+# dd retain-fields --in $withsources --out $outdir/datatypes --field-names datatype,source_file,source_directory
+# dd distinct --in $outdir/datatypes --out $outdir/datatypes
+# dd merge --in $outdir/datatypes --out $outdir/datatypes-summary.csv  --distinct --sorted
+#
+# dd retain-fields --in $latestversions --out $outdir/units --field-names units,source_file,source_directory
+# dd distinct --in $outdir/units --out $outdir/units
+# dd merge --in $outdir/units --out $outdir/units-summary.csv  --distinct --sorted
+#
+# dd retain-fields --in $latestversions --out $outdir/labels --field-names label,source_file,source_directory
+# dd merge --in $outdir/labels --out $outdir/labels-summary.csv  --distinct --sorted
+#
+# dd retain-fields --in $latestversions --out $outdir/value-constraints --field-names value_constraints,source_directory
+# dd merge --in $outdir/value-constraints --out $outdir/value-constraints-summary.csv  --distinct --sorted
