@@ -63,3 +63,7 @@ RADx-UP Reponse Options,Enumeration
 DHT Prompt,Label
 DHT Variable,Id
 DHT Response Options,Enumeration
+Concept,Section
+Variable,Id
+RADx Global Prompt,Label
+Responses,Enumeration
