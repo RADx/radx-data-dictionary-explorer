@@ -78,19 +78,10 @@ public class MergeCommand implements CliCommand {
 
             csv.content()
                .stream()
-               .map(inRow -> {
-                   var outRow = new String[outHeader.size()];
-                   Arrays.fill(outRow, "");
+               .map(inRow -> mapRow(outHeader, in2OutIndexesList, inRow))
+               .forEach(outRows::add);
 
-                   for(int i = 0; i < inRow.size(); i++) {
-                       if (i < in2OutIndexesList.size()) {
-                           int outIndex = in2OutIndexesList.get(i);
-                           outRow[outIndex] = inRow.get(i);
-                       }
 
-                   }
-                   return Arrays.stream(outRow).toList();
-               }).forEach(outRows::add);
 
         });
         var transformedRows = new CsvStreamTransformer(Collections.emptyList(),
@@ -106,8 +97,22 @@ public class MergeCommand implements CliCommand {
         csvPrinter.printRecord(outHeader);
         csvPrinter.printRecords(transformedRows);
         csvPrinter.flush();
-
+        Files.createDirectories(io.out.getParent());
         Files.writeString(io.out, buffer);
         return 0;
+    }
+
+    private List<String> mapRow(List<String> outHeader, List<Integer> in2OutIndexesList, List<String> inRow) {
+        var outRow = new String[outHeader.size()];
+        Arrays.fill(outRow, "");
+
+        for(int i = 0; i < inRow.size(); i++) {
+            if (i < in2OutIndexesList.size()) {
+                int outIndex = in2OutIndexesList.get(i);
+                outRow[outIndex] = inRow.get(i);
+            }
+
+        }
+        return Arrays.stream(outRow).toList();
     }
 }

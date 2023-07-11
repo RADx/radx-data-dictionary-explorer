@@ -24,7 +24,7 @@ public class FilterCommand implements CliCommand {
     @Mixin
     IoMixin io;
 
-    @Option(names = "--field-value-filter", split = ",", description = "Filter the specified field with the specified regular expression. Syntax is fieldName=regex.  Multiple filteres should be separated by commas.")
+    @Option(names = "--field-value-filter", split = ",", description = "Filter the specified field with the specified regular expression. Syntax is fieldName=regex.  Multiple filters should be separated by commas.")
     public List<String> fieldNameFilters = new ArrayList<>();
 
     private final CliCsvTransformerProcessor processor;
