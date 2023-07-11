@@ -37,7 +37,7 @@ public class InputFilesProcessor {
                 }
                 if(Files.isDirectory(inputPath)) {
                     var walker = Files.walk(inputPath, MAX_DEPTH, FileVisitOption.FOLLOW_LINKS);
-                    walker.forEach(p -> {
+                    walker.sorted().forEach(p -> {
                         processPotentialDataDictionaryFile(p, csvHandler);
                     });
                 }

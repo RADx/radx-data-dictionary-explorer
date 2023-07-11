@@ -1,65 +1,65 @@
 Field Name,Canonical Field Name
-answer_text,value_constraints
-answer_type,datatype
-api documentation (if applicable),seeAlso
+answer_text,Enumeration
+answer_type,Datatype
+api documentation (if applicable),Notes
 branching logic (show field only if...),branching_logic
 cde,
-"choices, calculations, or slider labels",value_constraints
+"choices, calculations, or slider Labels",Enumeration
 "comments (optional, form collection name)",form_name
 Form Name,form_name
 custom alignment,
 alignment,
-data type,datatype
+data type,Datatype
 dependent fields,
-description,description
-field annotation,description
-field label,label
-field name,variable_name
-field note,field_note
+description,Description
+field annotation,Description
+field Label,Label
+field name,Id
+field note,Notes
 field type,ui
-human-readable description,description
-human-readable description [formal definitions taken from official garmin api documentation),description
+human-readable description,Description
+human-readable description [formal definitions taken from official garmin api documentation),Description
 identifier?,phi_id
 mandatory?,required
 matrix group name,
 matrix ranking?,
-permisible values,value_constraints
-permissable values,value_constraints
-permissible value,value_constraints
-permissible values,value_constraints
-"possible values (if applicable)",value_constraints
-"possible values (if applicable) if 'value data type' = 'binary' and there is only one possible value shown, the alternative is null",value_constraints
-prompt,label
+permisible values,Enumeration
+permissable values,Enumeration
+permissible value,Enumeration
+permissible values,Enumeration
+possible values (if applicable),Enumeration
+"possible values (if applicable) if 'value data type' = 'binary' and there is only one possible value shown, the alternative is null",Enumeration
+prompt,Label
 question number,question_id
 question number (surveys only),question_id
-question or description (if necessary),label
-question_name,variable_name
-question_text,label
+question or description (if necessary),Label
+question_name,Id
+question_text,Label
 required field?,required
 section header,section_header
-slug,variable_name
+slug,Id
 submission requirement,required
 survey_name,survey_name
 survey_version,survey_version
-technical description,description
+technical description,Description
 text validation max,max
 text validation min,min
 text validation type or show slider number,pattern
 unique,unique
-unit,units
-units,units
-value data types,datatype
-variable / field name,variable_name
-variable name,variable_name
-RADx-TECH Prompt,label
-RADx-TECH Variable,variable_name
-RADx-TECH Response Options,value_constraints
-RADx-rad Prompt,label
-RADx-rad Variable,variable_name
-RADx-rad Response Options,value_constraints
-RADx-UP Prompt,label
-RADx-UP Variable,variable_name
-RADx-UP Reponse Options,value_constraints
-DHT Prompt,label
-DHT Variable,variable_name
-DHT Response Options,value_constraints
+unit,Unit
+Unit,Unit
+value data types,Datatype
+variable / field name,Id
+variable name,Id
+RADx-TECH Prompt,Label
+RADx-TECH Variable,Id
+RADx-TECH Response Options,Enumeration
+RADx-rad Prompt,Label
+RADx-rad Variable,Id
+RADx-rad Response Options,Enumeration
+RADx-UP Prompt,Label
+RADx-UP Variable,Id
+RADx-UP Reponse Options,Enumeration
+DHT Prompt,Label
+DHT Variable,Id
+DHT Response Options,Enumeration
